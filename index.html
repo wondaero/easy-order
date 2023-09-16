@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://wondaero.github.io/assets/css/normalize.css" />
+    <title>Document</title>
+    <style>
+        html, body{
+            height: 100%;
+        }
+        .wrapper{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .adv-section{
+            height: 100px;
+            background: cyan;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        main{
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        main .order-page header{
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        main .order-page ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        main .order-page ul li{
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        main .order-page ul li.add-li{
+            cursor: pointer;
+            justify-content: center;
+        }
+        main .order-page ul li .item-nm{
+            flex: 1;
+            width: 100%;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+        main .order-page ul li .cnt-wrapper{
+            display: flex;
+        }
+        main .order-page ul li .cnt-wrapper .item-cnt{
+            width: 30px;
+            text-align: right;
+            padding:  5px 10px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Chrome, Safari, Edge, Opera */
+        main .order-page ul li .item-cnt::-webkit-outer-spin-button,
+        main .order-page ul li .item-cnt::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        /* Firefox */
+        main .order-page ul li .item-cnt[type="number"] {-moz-appearance: textfield;}
+
+        main .order-page ul li .cnt-wrapper .btn-plus-minus{
+            border-radius: 5px;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 5px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        main .order-page ul li .cnt-wrapper .btn-plus-minus:hover{
+            background: #ddd;
+        }
+        main .order-page ul li .cnt-wrapper .btn-plus-minus:after{
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-top: 2px solid #333;
+            border-left: 2px solid #333;
+            position: relative;
+            /* background: red; */
+        }
+        main .order-page ul li .cnt-wrapper .btn-plus{
+            border-radius: 0 5px 5px 0;
+            border-left: 0;
+        }
+        main .order-page ul li .cnt-wrapper .btn-minus{
+            border-radius: 5px 0 0 5px;
+            border-right: 0;
+        }
+        main .order-page ul li .cnt-wrapper .btn-plus:after{
+            transform: rotate(45deg);
+            top: 3px;
+        }
+        main .order-page ul li .cnt-wrapper .btn-minus:after{
+            transform: rotate(225deg);
+            top: -3px;
+        }
+
+        
+        .loading-page{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fdd928;
+            z-index: 1;
+        }
+
+        .hidden{
+            display: none;
+        }
+
+        footer{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(0, 0, 0, .2);
+            box-sizing: border-box;
+            padding: 20px 10px;
+        }
+        footer label{
+            /* margin-right: 50px; */
+            display: flex;
+            align-items: center;
+        }
+        footer label:last-of-type{
+            margin-right: 0;
+        }
+        footer label input{
+            display: none;
+        }
+        footer label input:checked + strong{
+            transform: scale(1.2);
+            background: #000;
+            color: #fff;
+        }
+        footer label strong{
+            width: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            border: 1px solid #eee;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="adv-section">광고</aside>
+        <main>
+            <div class="order-page" data-page="order">
+                <header>
+                    <strong id="totalCntTag">총 0 잔</strong>
+                    <button onclick="saveData()">저장</button>
+                </header>
+                <ul>
+                    <li id="addLi" class="add-li" onclick="addLi()">추가+</li>
+                </ul>
+            </div>
+            <div class="hidden" data-page="my">
+                준비중입니다1
+            </div>
+            <div class="hidden" data-page="fr">
+                준비중입니다2
+            </div>
+        </main>
+        <footer>
+            <label>
+                <input type="radio" name="menu" value="order" checked />
+                <strong>주문하기</strong>
+            </label>
+            <label>
+                <input type="radio" name="menu" value="my"/>
+                <strong>나만의 메뉴</strong>
+            </label>
+            <label>
+                <input type="radio" name="menu" value="fr"/>
+                <strong>프렌차이즈</strong>
+            </label>
+        </footer>
+    </div>
+
+
+    <aside id="loadingPage" class="loading-page hidden">
+        <h1><img src="" alt="로고" /></h1>
+    </aside>
+
+    
+
+
+    <script>
+        const qs = trg => document.querySelector(trg);
+        const qsa = trgs => document.querySelectorAll(trgs);
+
+        const loadingPage = qs('#loadingPage');
+
+        const state = {
+            total: 0
+        }
+
+        setTimeout(() => {
+            loadingPage.classList.add('hidden');
+        }, 1000);
+
+        qsa('[name="menu"]').forEach((input) => {
+            input.onchange = (e) => {
+                const val = e.target.value;
+
+                qsa('[data-page]').forEach(page => {
+                    page.classList.add('hidden');
+                })
+
+                qs('[data-page="' + val + '"]').classList.remove('hidden');
+            }
+        })
+
+        const addLi = () => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <input type="text" name="" class="item-nm">
+                <div class="cnt-wrapper">
+                    <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)"></button>
+                    <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()">
+                    <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)"></button>
+                </div>
+                        
+            `;
+
+            qs('#addLi').before(li);
+        }
+
+        addLi();
+
+        const cntCtrl = (trg, num) => {
+            const target = trg.closest('div').querySelector('input');
+            target.value = (+target.value + +num);
+            changeValue();
+        }
+
+
+        const changeValue = () => {
+            state.total = 0;
+            qsa('[data-id="item-cnt"]').forEach(function(cnt){
+                state.total += +cnt.value;
+            })
+
+            qs('#totalCntTag').innerHTML = state.total + '잔';
+        }
+
+
+
+        const saveData = () => {
+            if(confirm('저장하시겠습니까?')){
+                const prmpt = prompt('타이틀을 입력해주세요.');
+                if(prmpt === null){
+                    alert('취소되었습니다.');
+                }else if(!prmpt){
+                    alert('타이틀을 확인해 주세요.');
+                }else{
+                    alert('준비중입니다.');
+                    // alert('저장되었습니다.');
+                }
+            }else{
+                alert('저장되지 않았습니다.');
+            }
+        }
+
+
+
+
+    </script>
+    
+</body>
+</html>
