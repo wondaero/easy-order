@@ -50,24 +50,47 @@
             list-style: none;
         }
         main .order-page ul li{
-            display: flex;
-            align-items: flex-start;
+            /* display: flex;
+            align-items: flex-start; */
             padding: 10px;
             border-bottom: 1px solid #eee;
         }
         main .order-page ul li.add-li{
             cursor: pointer;
-            justify-content: center;
+            text-align: center;
         }
         main .order-page ul li .item-nm{
-            flex: 1;
+            /* flex: 1; */
             width: 100%;
-            margin-right: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 5px 10px;
             resize: none;
-            height: 28px;
+            height: 31px;
+            box-sizing: border-box;
+            vertical-align: top;
+            margin-bottom: 5px;
+            /* display: flex;
+            align-items: center; */
+        }
+        main .order-page ul li .bottom{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        main .order-page ul li .bottom .btn-del{
+            background: #cf0000;
+            color: #fff;
+            border: 0;
+            border: 1px solid #ddd;
+            outline: 0;
+            border-radius: 5px;
+            width: 60px;
+            height: 31px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
         }
         main .order-page ul li .cnt-wrapper{
             display: flex;
@@ -77,8 +100,10 @@
             text-align: right;
             padding:  5px 10px;
             border: 1px solid #ddd;
-            height: 40px;
+            height: 31px;
             box-sizing: border-box;
+            margin: 0 10px;
+            border-radius: 5px;
         }
         
         /* Chrome, Safari, Edge, Opera */
@@ -100,38 +125,59 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            width: 30px;
-            height: 40px;
+            width: 40px;
+            height: 31px;
             box-sizing: border-box;
+            border-radius: 5px;
         }
         main .order-page ul li .cnt-wrapper .btn-plus-minus:hover{
             background: #ddd;
         }
-        /* main .order-page ul li .cnt-wrapper .btn-plus-minus:after{
-            content: '';
-            display: block;
-            width: 12px;
-            height: 12px;
-            border-top: 2px solid #333;
-            border-left: 2px solid #333;
-            position: relative;
-        } */
-        main .order-page ul li .cnt-wrapper .btn-plus{
-            border-radius: 0 5px 5px 0;
-            border-left: 0;
+        main .my-page header{
+            padding: 10px;
         }
-        main .order-page ul li .cnt-wrapper .btn-minus{
-            border-radius: 5px 0 0 5px;
-            border-right: 0;
+        main .my-page header .tip{
+            color: #cf0000;
+            background: #efa5a5;
+            border-radius: 5px;
+            padding: 7px;
+            margin: 0;
         }
-        /* main .order-page ul li .cnt-wrapper .btn-plus:after{
-            transform: rotate(45deg);
-            top: 3px;
+        main .my-page .my-list{
+            margin: 0;
+            padding: 0;
+            list-style: none;
         }
-        main .order-page ul li .cnt-wrapper .btn-minus:after{
-            transform: rotate(225deg);
-            top: -3px;
-        } */
+        main .my-page .my-list li{
+            padding: 10px;
+            border-bottom: 1px dotted #ddd;
+        }
+        main .my-page .my-list li h3{
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        main .my-page .my-list li h3 strong{
+            display: inline-block;
+            vertical-align: top;
+            width: 10px;
+            height: 25px;
+            margin-right: 10px;
+        }
+        main .my-page .my-list li .btns{
+            display: flex;
+            justify-content: space-between;
+        }
+        main .my-page .my-list li .btns button{
+            width: 80px;
+            padding: 10px;
+            border-radius: 5px;
+            vertical-align: top;
+            border: 0;
+            outline: 0;
+            border: 1px solid #ddd;
+            background: #fff;
+        }
+
 
         
         .loading-page{
@@ -147,9 +193,7 @@
             z-index: 1;
         }
 
-        .hidden{
-            display: none;
-        }
+        .hidden{display: none;}
 
         footer{
             display: flex;
@@ -185,7 +229,97 @@
             padding: 10px;
             cursor: pointer;
             font-size: 12px;
+            cursor: pointer;
         }
+
+        .layer{
+            background: rgba(0, 0, 0, .5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .layer .alert{
+            background: #fff;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            height: 80px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 5px #fff;
+        }
+        .layer .alert .btns{
+            text-align: center;
+        }
+        .layer .alert .btns button{
+            vertical-align: top;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 46px;
+            cursor: pointer;
+        }
+
+        .layer .alert.save-alert{
+            height: auto;
+        }
+
+        .layer .alert.save-alert p{
+            text-align: center;
+        }
+        .layer .alert.save-alert .my-title{
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            height: 32px;
+            margin-bottom: 10px;
+        }
+
+        .layer .alert .color-list{
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+            margin: 0 auto;
+            width: 230px;
+        }
+        .layer .alert .color-list li{
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .layer .alert .color-list li input{
+            display: none;
+        }
+        .layer .alert .color-list li input + strong{
+            display: inline-block;
+            vertical-align: top;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .layer .alert .color-list li input:checked + strong{
+            border: 5px double #fff;
+            box-sizing: border-box;
+        }
+        .layer .alert .color-list li:nth-of-type(6n){
+            margin-right: 0;
+        }
+        
     </style>
 </head>
 <body>
@@ -195,14 +329,17 @@
             <div class="order-page" data-page="order">
                 <header>
                     <button onclick="saveData()">저장</button>
-                    <strong id="totalCntTag">총 0 잔</strong>
+                    <strong id="totalCntTag"></strong>
                 </header>
                 <ul id="itemList">
                     <li id="addLi" class="add-li" onclick="addLi()">추가+</li>
                 </ul>
             </div>
-            <div class="hidden" data-page="my">
-                준비중입니다1
+            <div class="my-page hidden" data-page="my">
+                <header>
+                    <p class="tip">* 쿠키, 캐시를 지우면 <br />저장된 데이터가 모두 소멸됩니다.</p>
+                </header>
+                <ul id="myList" class="my-list"></ul>
             </div>
             <div class="hidden" data-page="fr">
                 준비중입니다2
@@ -274,35 +411,23 @@
                     onblur="resizeTxtarea(this)"
                     rows="1"
                 ></textarea>
-                <div class="cnt-wrapper">
-                    <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
-                    <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="1" onfocus="this.select()">
-                    <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
+                <div class="bottom">
+                    <div class="btns">
+                        <button class="btn-del" onclick="delRow2(this)">삭제</button>    
+                        <!--<button>복사</button>-->    
+                    </div>
+                    <div class="cnt-wrapper">
+                        <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
+                        <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="1" onfocus="this.select()">
+                        <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
+                    </div>
                 </div>
                         
             `;
 
             qs('#addLi').before(li);
-        }
-
-        addLi();
-
-        const resizeTxtarea = (trg) => {
-            trg.style.height = 'auto';
-            trg.style.height = trg.scrollHeight + 'px';
-
-        }
-
-        const cntCtrl = (trg, num) => {
-            const target = trg.closest('div').querySelector('input');
-            target.value = (+target.value + +num);
-            if(target.value < 1){
-                if(confirm('위 항목을 삭제하시겠습니까?')) delRow(trg);
-                else target.value = 1;
-            }
             changeValue();
         }
-
 
         const changeValue = () => {
             state.total = 0;
@@ -313,30 +438,76 @@
             qs('#totalCntTag').innerHTML = '총 ' + state.total + ' 잔';
         }
 
+        addLi();
+        
+
+        const resizeTxtarea = (trg) => {
+            trg.style.height = 'auto';
+            trg.style.height = (trg.scrollHeight + 3) + 'px';
+
+        }
+
+        const cntCtrl = (trg, num) => {
+            const target = trg.closest('div').querySelector('input');
+            target.value = (+target.value + +num);
+            if(target.value < 1){
+                cstmConfirm({
+                    msg: '위 항목을 삭제하시겠습니까?'
+                }).then(res => {
+                    delLayer();
+                    if(res) delRow(trg);
+                    else target.value = 1;
+                });
+            }
+            changeValue();
+        }
+
+        const delRow2 = (trg) => {
+            cstmConfirm({
+                msg: '위 항목을 삭제하시겠습니까?'
+            }).then(res => {
+                if(res) delRow(trg);
+
+                delLayer();
+            });
+            changeValue();
+        }
+
+
+        
+
         const delRow = (trg) => {
             trg.closest('li').remove();
-            alert('삭제되었습니다.');
+            cstmAlert('삭제되었습니다.');
             changeValue();
         }
 
 
 
-        const saveData = () => {
-            if(confirm('저장하시겠습니까?')){
-                const prmpt = prompt('타이틀을 입력해주세요.');
-                if(prmpt === null){
-                    alert('취소되었습니다.');
-                }else if(!prmpt){
-                    alert('타이틀을 확인해 주세요.');
-                }else{
-                    // alert('준비중입니다.');
 
-                    setLocalStorage(rdmCde(20), prmpt, trackingNms());
-                    // alert('저장되었습니다.');
-                }
-            }else{
-                alert('저장되지 않았습니다.');
-            }
+        const saveData = () => {
+            setMyMenu().then((res) => {
+                if(res.bool) setLocalStorage(rdmCde(20), (res.title || '타이틀 없음'), res.color, trackingNms());
+
+                delLayer();
+            });
+
+
+            // if(confirm('저장하시겠습니까?')){
+            //     const prmpt = prompt('타이틀을 입력해주세요.');
+            //     if(prmpt === null){
+            //         cstmAlert('취소되었습니다.');
+            //     }else if(!prmpt){
+            //         cstmAlert('타이틀을 확인해 주세요.');
+            //     }else{
+            //         // alert('준비중입니다.');
+
+            //         setLocalStorage(rdmCde(20), prmpt, trackingNms());
+            //         // alert('저장되었습니다.');
+            //     }
+            // }else{
+            //     cstmAlert('저장되지 않았습니다.');
+            // }
         }
 
         const trackingNms = () => {
@@ -345,7 +516,7 @@
                 tmpArr.push(li.querySelector('textarea').value);
             })
 
-            console.log(tmpArr);
+            // console.log(tmpArr);
             return tmpArr;
         }
         
@@ -362,13 +533,16 @@
         }
 
 
-        const setLocalStorage = (cde, title, data) => {
+        const setLocalStorage = (cde, title, color, data) => {
             const obj = {
                 title,
+                color,
                 data
             }
 
             window.localStorage.setItem(cde, JSON.stringify(obj));
+
+            cstmAlert('저장되었습니다.');
         }
 
 
@@ -382,7 +556,7 @@
 
         const myTab = () => {
             const myList = getLocalStorage();
-            console.log(myList);
+            // console.log(myList);
             const myArr = [];
 
             for(let i = 0; i < myList.length; i++){
@@ -393,14 +567,124 @@
                 });
             }
 
-            console.log(myArr);
+            // console.log(myArr);
 
-            const li = document.createElement('li');
-            li.innerHTML = `
+            qs('#myList').innerHTML = '';
 
-            `;
+            myArr.forEach((data) => {
+
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div>
+                        <h3 data-cde="${data.key}"><strong style="background: ${data.value.color};"></strong>${data.value.title}</h3>
+                        <div class="btns">
+                            <button>삭제</button>
+                            <button>보기</button>
+                            <button>적용</button>
+                        </div>
+                    </div>
+                `;
+
+                qs('#myList').append(li);
+            })
+
         }
 
+        
+        const cstmAlert = (msg) => {
+            const aside = document.createElement('aside');
+            aside.classList.add('layer')
+
+            aside.innerHTML = `
+                <div class="alert">
+                    <p>${msg}</p>
+                    <div class="btns">
+                        <button onclick="delLayer()">확인</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(aside);
+
+        }
+
+        const cstmConfirm = (obj) => {
+            const aside = document.createElement('aside');
+            aside.classList.add('layer')
+
+            aside.innerHTML = `
+                <div class="alert">
+                    <p>${obj.msg}</p>
+                    <div class="btns">
+                        <!--button onclick="confirmCallbak(${obj.fnc_ok})">확인</button-->
+                        <button id="btn_ok">확인</button>
+                        <button id="btn_cancel">취소</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(aside);
+
+            const result = new Promise((resolve, reject) => {
+                qs('#btn_ok').onclick = () => resolve(1);
+                qs('#btn_cancel').onclick = () => resolve(0);
+            });
+
+            return result;
+        }
+
+        const setMyMenu = () => {    //등록
+            const aside = document.createElement('aside');
+            aside.classList.add('layer');
+
+            const colorList = [
+                "#FFB6C1", "#E6E6FA", "#98FB98", "#ADD8E6", "#FFFF99", "#FFD700",
+                "#FF99CC", "#AFEEEE", "#32CD32", "#D3D3D3", "#9370DB", "#FF6B6B"
+            ];
+
+            aside.innerHTML = `
+                <div class="alert save-alert">
+                    <ul id="colorList" class="color-list"></ul>
+                    <p>타이틀을 입력해주세요.</p>
+                    <input type="text" id="myTitle" class="my-title" />
+
+                    <div class="btns">
+                        <button id="btn_ok">저장</button>
+                        <button id="btn_cancel" onclick="delLayer()">취소</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(aside);
+
+            colorList.forEach((color, idx) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <label>
+                        <input type="radio" name="color" value="${color}" ${idx === 0 ? 'checked' : ''}/>
+                        <strong style="background:${color}" ></strong>
+                    </label>
+                `;
+
+                qs('#colorList').appendChild(li);
+            })
+
+
+
+            const result = new Promise((resolve, reject) => {
+                qs('#btn_ok').onclick = () => resolve({
+                    bool: 1,
+                    title: qs('#myTitle').value,
+                    color: qs('#colorList input:checked').value
+                });
+
+                qs('#btn_cancel').onclick = () => resolve({bool: 0});
+            });
+
+            return result;
+        }
+
+        const delLayer = () => qs('.layer').remove();
 
 
 
