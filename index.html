@@ -342,13 +342,13 @@
                 <ul id="myList" class="my-list"></ul>
             </div>
             <div class="hidden" data-page="fr">
-                준비중입니다2
+                준비중입니다
             </div>
         </main>
         <footer>
             <label>
                 <input type="radio" name="menu" value="order" onchange="changeTab(this);" checked />
-                <strong>주문하기</strong>
+                <strong>주문받기</strong>
             </label>
             <label>
                 <input type="radio" name="menu" value="my" onchange="changeTab(this, myTab);" />
@@ -561,7 +561,7 @@
 
             for(let i = 0; i < myList.length; i++){
                 const key = window.localStorage.key(i);
-                if(key.indexOf('easyOrder_') === -1) continue;
+                // if(key.indexOf('easyOrder_') === -1) continue;
                 myArr.push({
                     key: key,
                     value: JSON.parse(myList[key])
