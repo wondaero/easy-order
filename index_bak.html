@@ -34,16 +34,6 @@
             align-items: center;
             justify-content: space-between;
         }
-        main .order-page header button{
-            background: #fff;
-            border: 0;
-            border: 1px solid #ddd;
-            outline: 0;
-            padding: 10px;
-            border-radius: 5px;
-            width: 60px;
-
-        }
         main .order-page ul{
             margin: 0;
             padding: 0;
@@ -51,7 +41,7 @@
         }
         main .order-page ul li{
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             padding: 10px;
             border-bottom: 1px solid #eee;
         }
@@ -66,19 +56,15 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 5px 10px;
-            resize: none;
-            height: 28px;
         }
         main .order-page ul li .cnt-wrapper{
             display: flex;
         }
         main .order-page ul li .cnt-wrapper .item-cnt{
-            width: 40px;
+            width: 30px;
             text-align: right;
             padding:  5px 10px;
             border: 1px solid #ddd;
-            height: 40px;
-            box-sizing: border-box;
         }
         
         /* Chrome, Safari, Edge, Opera */
@@ -100,14 +86,11 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            width: 30px;
-            height: 40px;
-            box-sizing: border-box;
         }
         main .order-page ul li .cnt-wrapper .btn-plus-minus:hover{
             background: #ddd;
         }
-        /* main .order-page ul li .cnt-wrapper .btn-plus-minus:after{
+        main .order-page ul li .cnt-wrapper .btn-plus-minus:after{
             content: '';
             display: block;
             width: 12px;
@@ -115,7 +98,8 @@
             border-top: 2px solid #333;
             border-left: 2px solid #333;
             position: relative;
-        } */
+            /* background: red; */
+        }
         main .order-page ul li .cnt-wrapper .btn-plus{
             border-radius: 0 5px 5px 0;
             border-left: 0;
@@ -124,14 +108,14 @@
             border-radius: 5px 0 0 5px;
             border-right: 0;
         }
-        /* main .order-page ul li .cnt-wrapper .btn-plus:after{
+        main .order-page ul li .cnt-wrapper .btn-plus:after{
             transform: rotate(45deg);
             top: 3px;
         }
         main .order-page ul li .cnt-wrapper .btn-minus:after{
             transform: rotate(225deg);
             top: -3px;
-        } */
+        }
 
         
         .loading-page{
@@ -194,10 +178,10 @@
         <main>
             <div class="order-page" data-page="order">
                 <header>
-                    <button onclick="saveData()">저장</button>
                     <strong id="totalCntTag">총 0 잔</strong>
+                    <button onclick="saveData()">저장</button>
                 </header>
-                <ul id="itemList">
+                <ul>
                     <li id="addLi" class="add-li" onclick="addLi()">추가+</li>
                 </ul>
             </div>
@@ -210,15 +194,15 @@
         </main>
         <footer>
             <label>
-                <input type="radio" name="menu" value="order" onchange="changeTab(this);" checked />
+                <input type="radio" name="menu" value="order" checked />
                 <strong>주문하기</strong>
             </label>
             <label>
-                <input type="radio" name="menu" value="my" onchange="changeTab(this, myTab);" />
+                <input type="radio" name="menu" value="my"/>
                 <strong>나만의 메뉴</strong>
             </label>
             <label>
-                <input type="radio" name="menu" value="fr" onchange="changeTab(this);" />
+                <input type="radio" name="menu" value="fr"/>
                 <strong>프렌차이즈</strong>
             </label>
         </footer>
@@ -246,38 +230,26 @@
             loadingPage.classList.add('hidden');
         }, 1000);
 
+        qsa('[name="menu"]').forEach((input) => {
+            input.onchange = (e) => {
+                const val = e.target.value;
 
+                qsa('[data-page]').forEach(page => {
+                    page.classList.add('hidden');
+                })
 
-        const changeTab = (trg, cb) => {
-            const val = trg.value;
-
-            qsa('[data-page]').forEach(page => {
-                page.classList.add('hidden');
-            })
-
-            qs('[data-page="' + val + '"]').classList.remove('hidden');
-
-            if(cb !== undefined && typeof cb === 'function') cb();
-        }
-
+                qs('[data-page="' + val + '"]').classList.remove('hidden');
+            }
+        })
 
         const addLi = () => {
             const li = document.createElement('li');
-            li.dataset.type = 'item';
             li.innerHTML = `
-                <textarea type="text" name="" class="item-nm"
-                    onkeyup="resizeTxtarea(this)"
-                    onkeydown="resizeTxtarea(this)"
-                    oninput="resizeTxtarea(this)"
-                    onfocus="resizeTxtarea(this)"
-                    onchange="resizeTxtarea(this)"
-                    onblur="resizeTxtarea(this)"
-                    rows="1"
-                ></textarea>
+                <input type="text" name="" class="item-nm">
                 <div class="cnt-wrapper">
-                    <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
-                    <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="1" onfocus="this.select()">
-                    <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
+                    <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)"></button>
+                    <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()">
+                    <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)"></button>
                 </div>
                         
             `;
@@ -287,19 +259,9 @@
 
         addLi();
 
-        const resizeTxtarea = (trg) => {
-            trg.style.height = 'auto';
-            trg.style.height = trg.scrollHeight + 'px';
-
-        }
-
         const cntCtrl = (trg, num) => {
             const target = trg.closest('div').querySelector('input');
             target.value = (+target.value + +num);
-            if(target.value < 1){
-                if(confirm('위 항목을 삭제하시겠습니까?')) delRow(trg);
-                else target.value = 1;
-            }
             changeValue();
         }
 
@@ -310,13 +272,7 @@
                 state.total += +cnt.value;
             })
 
-            qs('#totalCntTag').innerHTML = '총 ' + state.total + ' 잔';
-        }
-
-        const delRow = (trg) => {
-            trg.closest('li').remove();
-            alert('삭제되었습니다.');
-            changeValue();
+            qs('#totalCntTag').innerHTML = state.total + '잔';
         }
 
 
@@ -329,76 +285,12 @@
                 }else if(!prmpt){
                     alert('타이틀을 확인해 주세요.');
                 }else{
-                    // alert('준비중입니다.');
-
-                    setLocalStorage(rdmCde(20), prmpt, trackingNms());
+                    alert('준비중입니다.');
                     // alert('저장되었습니다.');
                 }
             }else{
                 alert('저장되지 않았습니다.');
             }
-        }
-
-        const trackingNms = () => {
-            const tmpArr = [];
-            qsa('#itemList li[data-type="item"]').forEach((li) => {
-                tmpArr.push(li.querySelector('textarea').value);
-            })
-
-            console.log(tmpArr);
-            return tmpArr;
-        }
-        
-
-        const rdmCde = (len = 10) => {
-            const getRandomNum = (mn, mx) => Math.floor(Math.random() * (mx - mn + 1)) + mn;
-            const txts = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            
-            let cde = '';
-
-            for(let i = 0; i < len; i++) cde += txts[getRandomNum(0, txts.length - 1)];
-
-            return cde;
-        }
-
-
-        const setLocalStorage = (cde, title, data) => {
-            const obj = {
-                title,
-                data
-            }
-
-            window.localStorage.setItem(cde, JSON.stringify(obj));
-        }
-
-
-        const getLocalStorage = (cde) => {
-            if(cde === undefined){
-                return window.localStorage;
-            }else{
-                return window.localStorage.getItem(cde);
-            }
-        }
-
-        const myTab = () => {
-            const myList = getLocalStorage();
-            console.log(myList);
-            const myArr = [];
-
-            for(let i = 0; i < myList.length; i++){
-                const key = window.localStorage.key(i);
-                myArr.push({
-                    key: key,
-                    value: JSON.parse(myList[key])
-                });
-            }
-
-            console.log(myArr);
-
-            const li = document.createElement('li');
-            li.innerHTML = `
-
-            `;
         }
 
 
