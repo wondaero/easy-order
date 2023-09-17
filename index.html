@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no"">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://wondaero.github.io/assets/css/normalize.css" />
     <title>2지5더</title>
     <style>
@@ -418,7 +418,7 @@
                     </div>
                     <div class="cnt-wrapper">
                         <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
-                        <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="1" onfocus="this.select()">
+                        <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="0" onfocus="this.select()">
                         <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
                     </div>
                 </div>
@@ -435,7 +435,7 @@
                 state.total += +cnt.value;
             })
 
-            qs('#totalCntTag').innerHTML = '총 ' + state.total + ' 잔';
+            qs('#totalCntTag').innerHTML = 'TOTAL ' + state.total;
         }
 
         addLi();
@@ -491,23 +491,6 @@
 
                 delLayer();
             });
-
-
-            // if(confirm('저장하시겠습니까?')){
-            //     const prmpt = prompt('타이틀을 입력해주세요.');
-            //     if(prmpt === null){
-            //         cstmAlert('취소되었습니다.');
-            //     }else if(!prmpt){
-            //         cstmAlert('타이틀을 확인해 주세요.');
-            //     }else{
-            //         // alert('준비중입니다.');
-
-            //         setLocalStorage(rdmCde(20), prmpt, trackingNms());
-            //         // alert('저장되었습니다.');
-            //     }
-            // }else{
-            //     cstmAlert('저장되지 않았습니다.');
-            // }
         }
 
         const trackingNms = () => {
@@ -552,6 +535,8 @@
             }else{
                 return window.localStorage.getItem(cde);
             }
+
+            alert('테스트');
         }
 
         const myTab = () => {
@@ -561,12 +546,10 @@
 
             for(let i = 0; i < myList.length; i++){
                 const key = window.localStorage.key(i);
-                alert(key);
                 myArr.push({
                     key: key,
                     value: JSON.parse(myList[key])
                 });
-                alert(myArr);
             }
 
             // alert(JSON.stringify(myArr));
@@ -658,6 +641,8 @@
             `;
             
             document.body.appendChild(aside);
+
+            qs('#myTitle').focus();
 
             colorList.forEach((color, idx) => {
                 const li = document.createElement('li');
