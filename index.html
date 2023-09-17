@@ -576,19 +576,19 @@
 
             myArr.forEach((data) => {
 
+                alert(JSON.stringify(data));
 
                 const li = document.createElement('li');
-                // li.innerHTML = `
-                //     <div>
-                //         <h3 data-cde="${data.key}"><strong style="background: ${data.value.color};"></strong>${data.value.title}</h3>
-                //         <div class="btns">
-                //             <button>삭제</button>
-                //             <button>보기</button>
-                //             <button>적용</button>
-                //         </div>
-                //     </div>
-                // `;
-                li.innerHTML = `${JSON.stringify(data)}`;
+                li.innerHTML = `
+                    <div>
+                        <h3 data-cde="${data.key}"><strong style="background: ${data.value.color};"></strong>${data.value.title}</h3>
+                        <div class="btns">
+                            <button>삭제</button>
+                            <button>보기</button>
+                            <button>적용</button>
+                        </div>
+                    </div>
+                `;
 
                 qs('#myList').append(li);
             })
