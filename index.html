@@ -79,14 +79,12 @@
             justify-content: space-between;
         }
         main .order-page ul li .bottom .btn-del{
-            background: #cf0000;
+            background: #fff;
             color: #fff;
             border: 0;
-            border: 1px solid #ddd;
+            border: 1px solid #cf0000;
             outline: 0;
             border-radius: 5px;
-            width: 60px;
-            height: 31px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -104,6 +102,7 @@
             box-sizing: border-box;
             margin: 0 10px;
             border-radius: 5px;
+            font-weight: bold;
         }
         
         /* Chrome, Safari, Edge, Opera */
@@ -319,6 +318,10 @@
         .layer .alert .color-list li:nth-of-type(6n){
             margin-right: 0;
         }
+
+        .color-red{
+            color: #cf0000;
+        }
         
     </style>
 </head>
@@ -413,12 +416,14 @@
                 ></textarea>
                 <div class="bottom">
                     <div class="btns">
-                        <button class="btn-del" onclick="delRow2(this)">삭제</button>    
+                        <button class="btn-del" onclick="delRow2(this)">
+                            <img src="./assets/iconmonstr-trash-can-filled.svg" alt="제거" height="27"/>
+                        </button>    
                         <!--<button>복사</button>-->    
                     </div>
                     <div class="cnt-wrapper">
                         <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
-                        <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="0" onfocus="this.select()">
+                        <input class="item-cnt color-red" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="0" onfocus="this.select()">
                         <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
                     </div>
                 </div>
@@ -432,6 +437,11 @@
         const changeValue = () => {
             state.total = 0;
             qsa('[data-id="item-cnt"]').forEach(function(cnt){
+                cnt.classList.remove('color-red');
+                if(cnt.value <= 0){
+                    cnt.classList.add('color-red');
+                    cnt.value = 0;
+                }
                 state.total += +cnt.value;
             })
 
@@ -451,13 +461,15 @@
             const target = trg.closest('div').querySelector('input');
             target.value = (+target.value + +num);
             if(target.value < 1){
-                cstmConfirm({
-                    msg: '위 항목을 삭제하시겠습니까?'
-                }).then(res => {
-                    delLayer();
-                    if(res) delRow(trg);
-                    else target.value = 1;
-                });
+                target.value = 0;
+
+                // cstmConfirm({
+                //     msg: '위 항목을 삭제하시겠습니까?'
+                // }).then(res => {
+                //     delLayer();
+                //     if(res) delRow(trg);
+                //     else target.value = 1;
+                // });
             }
             changeValue();
         }
@@ -559,7 +571,6 @@
             qs('#myList').innerHTML = '';
 
             myArr.forEach((data) => {
-                alert(JSON.stringify(data));
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <div>
