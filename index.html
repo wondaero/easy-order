@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no"">
     <link rel="stylesheet" href="https://wondaero.github.io/assets/css/normalize.css" />
     <title>Document</title>
     <style>
@@ -540,7 +540,7 @@
                 data
             }
 
-            window.localStorage.setItem(cde, JSON.stringify(obj));
+            window.localStorage[cde] = JSON.stringify(obj);
 
             cstmAlert('저장되었습니다.');
         }
