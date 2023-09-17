@@ -560,12 +560,13 @@
             const myArr = [];
 
             for(let i = 0; i < myList.length; i++){
-                alert(i);
                 const key = window.localStorage.key(i);
+                alert(key);
                 myArr.push({
                     key: key,
                     value: JSON.parse(myList[key])
                 });
+                alert(myArr);
             }
 
             // alert(JSON.stringify(myArr));
