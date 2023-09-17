@@ -418,7 +418,7 @@
                     </div>
                     <div class="cnt-wrapper">
                         <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
-                        <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="1" onfocus="this.select()">
+                        <input class="item-cnt" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="0" onfocus="this.select()">
                         <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
                     </div>
                 </div>
@@ -435,7 +435,7 @@
                 state.total += +cnt.value;
             })
 
-            qs('#totalCntTag').innerHTML = '총 ' + state.total + ' 잔';
+            qs('#totalCntTag').innerHTML = 'TOTAL ' + state.total;
         }
 
         addLi();
@@ -487,7 +487,7 @@
 
         const saveData = () => {
             setMyMenu().then((res) => {
-                if(res.bool) setLocalStorage(rdmCde(20), (res.title || '타이틀 없음'), res.color, trackingNms());
+                if(res.bool) setLocalStorage('easyOrder_' + rdmCde(20), (res.title || '타이틀 없음'), res.color, trackingNms());
 
                 delLayer();
             });
@@ -561,12 +561,13 @@
 
             for(let i = 0; i < myList.length; i++){
                 const key = window.localStorage.key(i);
-                alert(key);
+                if(key.indexOf('easyOrder_') === -1) continue;
                 myArr.push({
                     key: key,
                     value: JSON.parse(myList[key])
                 });
-                alert(myArr);
+
+                
             }
 
             // alert(JSON.stringify(myArr));
@@ -574,6 +575,8 @@
             qs('#myList').innerHTML = '';
 
             myArr.forEach((data) => {
+
+                alert(JSON.stringify(data));
 
                 const li = document.createElement('li');
                 li.innerHTML = `
@@ -671,6 +674,8 @@
                 qs('#colorList').appendChild(li);
             })
 
+
+            qs('#myTitle').focus();
 
 
             const result = new Promise((resolve, reject) => {
