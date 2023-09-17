@@ -556,11 +556,11 @@
 
         const myTab = () => {
             const myList = getLocalStorage();
-            alert(JSON.stringify(myList));
             // console.log(myList);
             const myArr = [];
 
             for(let i = 0; i < myList.length; i++){
+                alert(i);
                 const key = window.localStorage.key(i);
                 myArr.push({
                     key: key,
