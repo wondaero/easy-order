@@ -88,7 +88,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
         }
         main .order-page ul li .cnt-wrapper{
             display: flex;
@@ -168,13 +167,27 @@
         }
         main .my-page .my-list li .btns button{
             width: 80px;
-            padding: 10px;
             border-radius: 5px;
             vertical-align: top;
             border: 0;
             outline: 0;
             border: 1px solid #ddd;
             background: #fff;
+            padding: 5px;
+        }
+
+        main .my-page .my-list li .btns button.btn-del{
+            background: #fff;
+            color: #fff;
+            border: 0;
+            border: 1px solid #cf0000;
+            outline: 0;
+            padding: 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
         }
 
 
@@ -248,7 +261,7 @@
             border-radius: 5px;
             width: 100%;
             max-width: 300px;
-            height: 80px;
+            /* height: 80px; */
             padding: 10px;
             box-sizing: border-box;
             border: 1px solid #ddd;
@@ -312,8 +325,9 @@
             border-radius: 50%;
         }
         .layer .alert .color-list li input:checked + strong{
-            border: 5px double #fff;
+            border: 1px solid #000;
             box-sizing: border-box;
+            transform: scale(1.2);
         }
         .layer .alert .color-list li:nth-of-type(6n){
             margin-right: 0;
@@ -401,7 +415,7 @@
         }
 
 
-        const addLi = () => {
+        const addLi = (txt) => {
             const li = document.createElement('li');
             li.dataset.type = 'item';
             li.innerHTML = `
@@ -413,7 +427,7 @@
                     onchange="resizeTxtarea(this)"
                     onblur="resizeTxtarea(this)"
                     rows="1"
-                ></textarea>
+                >${txt || ''}</textarea>
                 <div class="bottom">
                     <div class="btns">
                         <button class="btn-del" onclick="delRow2(this)">
@@ -454,7 +468,6 @@
         const resizeTxtarea = (trg) => {
             trg.style.height = 'auto';
             trg.style.height = (trg.scrollHeight + 3) + 'px';
-
         }
 
         const cntCtrl = (trg, num) => {
@@ -475,13 +488,14 @@
         }
 
         const delRow2 = (trg) => {
-            cstmConfirm({
-                msg: '위 항목을 삭제하시겠습니까?'
-            }).then(res => {
-                if(res) delRow(trg);
+            // cstmConfirm({
+            //     msg: '위 항목을 삭제하시겠습니까?'
+            // }).then(res => {
+            //     if(res) delRow(trg);
 
-                delLayer();
-            });
+            //     delLayer();
+            // });
+            delRow(trg);
             changeValue();
         }
 
@@ -490,7 +504,7 @@
 
         const delRow = (trg) => {
             trg.closest('li').remove();
-            cstmAlert('삭제되었습니다.');
+            // cstmAlert('삭제되었습니다.');
             changeValue();
         }
 
@@ -547,13 +561,25 @@
             }else{
                 return window.localStorage.getItem(cde);
             }
+        }
+        const delLocalStorage = (cde) => {
 
-            alert('테스트');
+            cstmConfirm({
+                msg: `${cde === undefined ? '모든' : '해당'} 데이터를<br/>삭제하시겠습니까?`
+            }).then(res => {
+                if(res){
+                    if(cde === undefined) window.localStorage.clear();
+                    else window.localStorage.removeItem(cde);
+
+                    myTab();
+                }
+                
+                delLayer();
+            });
         }
 
         const myTab = () => {
             const myList = getLocalStorage();
-            // console.log(myList);
             const myArr = [];
 
             for(let i = 0; i < myList.length; i++){
@@ -576,9 +602,11 @@
                     <div>
                         <h3 data-cde="${data.key}"><strong style="background: ${data.value.color};"></strong>${data.value.title}</h3>
                         <div class="btns">
-                            <button>삭제</button>
-                            <button>보기</button>
-                            <button>적용</button>
+                            <button class="btn-del" onclick="delLocalStorage('${data.key}')"><img src="./assets/iconmonstr-trash-can-filled.svg" alt="제거" height="27"/></button>
+                            <div>
+                                <button>보기</button>
+                                <button onclick="setTmpl('${data.key}')">적용</button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -667,9 +695,9 @@
                 `;
 
                 qs('#colorList').appendChild(li);
+
+                li.querySelector('input').onchange = () => qs('#myTitle').focus();
             })
-
-
 
             const result = new Promise((resolve, reject) => {
                 qs('#btn_ok').onclick = () => resolve({
@@ -686,7 +714,35 @@
 
         const delLayer = () => qs('.layer').remove();
 
+        const setTmpl = (cde) => {
+            cstmConfirm({
+                msg: '적용하시겠습니까? <br/> 기존데이터는 지워집니다.'
+            }).then(res => {
+                if(res){
+                    const data = JSON.parse(getLocalStorage(cde));
+                    qsa('#itemList [data-type="item"]').forEach((item) => item.remove());
 
+                    data.data.forEach((item, idx) => {
+                        addLi(item);
+                    });
+
+                    setTimeout(() => {
+                        qsa('li[data-type="item"]').forEach(li => {
+                            resizeTxtarea(li.querySelector('textarea'));
+                        })
+                    })
+
+                    qs('input[value="order"]').checked = true;
+                    changeTab(qs('input[value="order"]'));
+
+                }
+
+                delLayer();
+            });
+
+
+
+        }
 
     </script>
     
