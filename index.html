@@ -15,7 +15,7 @@
             height: 100%;
         }
         .adv-section{
-            height: 100px;
+            height: 80px;
             background: cyan;
             display: flex;
             align-items: center;
@@ -48,16 +48,44 @@
             margin: 0;
             padding: 0;
             list-style: none;
+            padding: 5px;
+            overflow: hidden;
         }
         main .order-page ul li{
-            /* display: flex;
-            align-items: flex-start; */
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+            padding: 5px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            background: 0;
+            position: relative;
+            transition: background 1s,
+            left 1s linear(0 0%, 0 2.27%, 0.02 4.53%, 0.04 6.8%, 0.06 9.07%, 0.1 11.33%, 0.14 13.6%, 0.25 18.15%, 0.39 22.7%, 0.56 27.25%, 0.77 31.8%, 1 36.35%, 0.89 40.9%, 0.85 43.18%, 0.81 45.45%, 0.79 47.72%, 0.77 50%, 0.75 52.27%, 0.75 54.55%, 0.75 56.82%, 0.77 59.1%, 0.79 61.38%, 0.81 63.65%, 0.85 65.93%, 0.89 68.2%, 1 72.7%, 0.97 74.98%, 0.95 77.25%, 0.94 79.53%, 0.94 81.8%, 0.94 84.08%, 0.95 86.35%, 0.97 88.63%, 1 90.9%, 0.99 93.18%, 0.98 95.45%, 0.99 97.73%, 1 100%);
+            left: 0;
+        }
+        main .order-page ul .yet{
+            left: -150%;
+            transition: left .3s;
+        }
+        main .order-page ul li:not(.add-li):hover{
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .8);
+        }
+        main .order-page ul li.hot{
+            background: url(assets/imgs/hot-bg2.jpg) no-repeat;
+            background-size: cover;
+        }
+        main .order-page ul li.ice{
+            background: url(assets/imgs/ice-bg2.jpg) no-repeat;
+            background-size: cover;
         }
         main .order-page ul li.add-li{
             cursor: pointer;
             text-align: center;
+        }
+        main .order-page ul li .top{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
         }
         main .order-page ul li .item-nm{
             /* flex: 1; */
@@ -69,26 +97,73 @@
             height: 31px;
             box-sizing: border-box;
             vertical-align: top;
-            margin-bottom: 5px;
+            margin-right: 10px;
+            /* margin-bottom: 5px; */
             /* display: flex;
             align-items: center; */
         }
         main .order-page ul li .bottom{
+        }
+        main .order-page ul li .bottom .btns{
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
+        main .order-page ul li .bottom .tempos:first-of-type{
+            margin-right: 5px;
+        }
+        main .order-page ul li .bottom .tempos input{
+            display: none;
+        }
+        main .order-page ul li .bottom .tempo-ice input + strong{
+            color: #fff;
+            text-shadow: 0 -4px 5px #00f;
+        }
+        
+        
+        main .order-page ul li .bottom .tempo-hot input + strong{
+            color: #cf0000;
+            text-shadow: 0 -4px 5px #ff6f58;
+        }
         main .order-page ul li .bottom .btn-del{
             background: #fff;
-            color: #fff;
             border: 0;
-            border: 1px solid #cf0000;
             outline: 0;
             border-radius: 5px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            padding: 0;
         }
+        main .order-page ul li .bottom .btn-detail{
+            background: #fff;
+            border: 0;
+            outline: 0;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+        main .order-page ul li .bottom .btn-detail > strong{
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: top;
+            width: 5px;
+            height: 5px;
+            background: #000;
+            margin-right: 3px;
+        }
+        main .order-page ul li .bottom .btn-detail > strong:last-of-type{
+            margin-right: 0;
+        }
+        
         main .order-page ul li .cnt-wrapper{
             display: flex;
         }
@@ -99,7 +174,7 @@
             border: 1px solid #ddd;
             height: 31px;
             box-sizing: border-box;
-            margin: 0 10px;
+            margin: 0 5px;
             border-radius: 5px;
             font-weight: bold;
         }
@@ -107,8 +182,8 @@
         /* Chrome, Safari, Edge, Opera */
         main .order-page ul li .item-cnt::-webkit-outer-spin-button,
         main .order-page ul li .item-cnt::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+            -webkit-appearance: none;
+            margin: 0;
         }
         /* Firefox */
         main .order-page ul li .item-cnt[type="number"] {-moz-appearance: textfield;}
@@ -417,34 +492,59 @@
 
         const addLi = (txt) => {
             const li = document.createElement('li');
+            li.classList.add('yet');
             li.dataset.type = 'item';
             li.innerHTML = `
-                <textarea type="text" name="" class="item-nm"
-                    onkeyup="resizeTxtarea(this)"
-                    onkeydown="resizeTxtarea(this)"
-                    oninput="resizeTxtarea(this)"
-                    onfocus="resizeTxtarea(this)"
-                    onchange="resizeTxtarea(this)"
-                    onblur="resizeTxtarea(this)"
-                    rows="1"
-                >${txt || ''}</textarea>
-                <div class="bottom">
-                    <div class="btns">
-                        <button class="btn-del" onclick="delRow2(this)">
-                            <img src="./assets/iconmonstr-trash-can-filled.svg" alt="제거" height="27"/>
-                        </button>    
-                        <!--<button>복사</button>-->    
-                    </div>
+                <div class="top">
+                    <textarea type="text" name="" class="item-nm"
+                        onkeyup="resizeTxtarea(this)"
+                        onkeydown="resizeTxtarea(this)"
+                        oninput="resizeTxtarea(this)"
+                        onfocus="resizeTxtarea(this)"
+                        onchange="resizeTxtarea(this)"
+                        onblur="resizeTxtarea(this)"
+                        rows="1"
+                    >${txt || ''}</textarea>
                     <div class="cnt-wrapper">
                         <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
                         <input class="item-cnt color-red" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="0" onfocus="this.select()">
                         <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
                     </div>
                 </div>
+                <div class="bottom">
+                    <div class="btns">
+                        <div>
+                            <label class="tempos tempo-ice">
+                                <input type="radio" name="tempo" value="ice" onchange="changeBg(this)" />
+                                <strong>ICE</strong> 
+                            </label>
+                            <label class="tempos tempo-hot">
+                                <input type="radio" name="tempo" value="hot" onchange="changeBg(this)" />
+                                <strong>HOT</strong> 
+                            </label>
+                        </div>
+                        <div>
+                            <button class="btn-del" onclick="delRow2(this)">
+                                <img src="./assets/imgs/iconmonstr-trash-can-filled.svg" alt="제거" height="27"/>
+                            </button>   
+                            <button class="btn-detail" onclick="toggleDetail(this)">
+                                <strong></strong>
+                                <strong></strong>
+                                <strong></strong>
+                                <span class="hidden"></span>
+                            </button>   
+                            <!--<button>복사</button>-->    
+                        </div>
+                    </div>
+                    
+                </div>
                         
             `;
 
             qs('#addLi').before(li);
+            setTimeout(() => {
+                li.classList.remove('yet');
+            });
             changeValue();
         }
 
@@ -495,8 +595,13 @@
 
             //     delLayer();
             // });
-            delRow(trg);
-            changeValue();
+            const li = trg.closest('li')
+            li.classList.add('yet');
+
+            li.ontransitionend = () => {
+                delRow(trg);
+                changeValue();
+            }
         }
 
 
@@ -602,7 +707,7 @@
                     <div>
                         <h3 data-cde="${data.key}"><strong style="background: ${data.value.color};"></strong>${data.value.title}</h3>
                         <div class="btns">
-                            <button class="btn-del" onclick="delLocalStorage('${data.key}')"><img src="./assets/iconmonstr-trash-can-filled.svg" alt="제거" height="27"/></button>
+                            <button class="btn-del" onclick="delLocalStorage('${data.key}')"><img src="./assets/imgs/iconmonstr-trash-can-filled.svg" alt="제거" height="27"/></button>
                             <div>
                                 <button>보기</button>
                                 <button onclick="setTmpl('${data.key}')">적용</button>
@@ -657,6 +762,12 @@
             });
 
             return result;
+        }
+
+        const changeBg = (trg) => {
+            const val = trg.value;
+            if(val === 'ice') trg.closest('li').setAttribute('class', 'ice');
+            else if(val === 'hot') trg.closest('li').setAttribute('class', 'hot');
         }
 
         const setMyMenu = () => {    //등록
@@ -739,7 +850,11 @@
 
                 delLayer();
             });
+        }
 
+        const toggleDetail = (trg) => {
+            const detailView = trg.querySelector(':scope > span');
+            setTimeout(() => detailView.classList.remove('hidden'));
 
 
         }
