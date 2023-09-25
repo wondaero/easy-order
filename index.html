@@ -13,6 +13,9 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            max-width: 800px;
+            min-width: 250px;
+            margin: 0 auto;
         }
         .adv-section{
             height: 80px;
@@ -27,9 +30,18 @@
             overflow-y: auto;
         }
 
+        main .order-page.hidden{
+            display: none;
+        }
+        main .order-page{
+            background: #eee;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
         main .order-page header{
             padding: 10px;
-            border-bottom: 1px solid #eee;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .5);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -45,18 +57,19 @@
 
         }
         main .order-page ul{
+            flex: 1;
             margin: 0;
             padding: 0;
             list-style: none;
-            padding: 5px;
-            overflow: hidden;
+            padding: 10px;
+            overflow-y: auto;
         }
         main .order-page ul li{
-            padding: 5px;
+            padding: 10px;
             border: 1px solid #eee;
             border-radius: 5px;
             margin-bottom: 5px;
-            background: 0;
+            background: #fff;
             position: relative;
             transition: background 1s,
             left 1s linear(0 0%, 0 2.27%, 0.02 4.53%, 0.04 6.8%, 0.06 9.07%, 0.1 11.33%, 0.14 13.6%, 0.25 18.15%, 0.39 22.7%, 0.56 27.25%, 0.77 31.8%, 1 36.35%, 0.89 40.9%, 0.85 43.18%, 0.81 45.45%, 0.79 47.72%, 0.77 50%, 0.75 52.27%, 0.75 54.55%, 0.75 56.82%, 0.77 59.1%, 0.79 61.38%, 0.81 63.65%, 0.85 65.93%, 0.89 68.2%, 1 72.7%, 0.97 74.98%, 0.95 77.25%, 0.94 79.53%, 0.94 81.8%, 0.94 84.08%, 0.95 86.35%, 0.97 88.63%, 1 90.9%, 0.99 93.18%, 0.98 95.45%, 0.99 97.73%, 1 100%);
@@ -67,7 +80,11 @@
             transition: left .3s;
         }
         main .order-page ul li:not(.add-li):hover{
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .8);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, .8);
+            border: 0;
+        }
+        main .order-page ul li:not(.add-li):hover .bottom{
+            display: block;
         }
         main .order-page ul li.hot{
             background: url(assets/imgs/hot-bg2.jpg) no-repeat;
@@ -85,24 +102,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 5px;
         }
         main .order-page ul li .item-nm{
-            /* flex: 1; */
             width: 100%;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 5px 10px;
             resize: none;
-            height: 31px;
+            height: 30px;
             box-sizing: border-box;
             vertical-align: top;
             margin-right: 10px;
-            /* margin-bottom: 5px; */
-            /* display: flex;
-            align-items: center; */
         }
         main .order-page ul li .bottom{
+            display: none;
+            margin-top: 10px;
         }
         main .order-page ul li .bottom .btns{
             display: flex;
@@ -138,6 +152,26 @@
             height: 30px;
             padding: 0;
         }
+        main .order-page ul li .bottom .toggle-memo{
+            vertical-align: middle;
+        }
+        main .order-page ul li .bottom .toggle-memo input{
+            display: none;
+        }
+        main .order-page ul li .bottom .toggle-memo input + strong{
+            display: inline-flex;
+            width: 35px;
+            height: 30px;
+            vertical-align: middle;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            background: #fff;
+            color: #ddd;
+        }
+        main .order-page ul li .bottom .toggle-memo input:checked + strong{
+            color: #000;
+        }
         main .order-page ul li .bottom .btn-detail{
             background: #fff;
             border: 0;
@@ -172,7 +206,7 @@
             text-align: right;
             padding:  5px 10px;
             border: 1px solid #ddd;
-            height: 31px;
+            height: 30px;
             box-sizing: border-box;
             margin: 0 5px;
             border-radius: 5px;
@@ -192,20 +226,75 @@
             border-radius: 5px;
             background: #fff;
             border: 1px solid #ddd;
-            padding: 5px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            width: 40px;
-            height: 31px;
+            width: 30px;
+            height: 30px;
+            box-sizing: border-box;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        main .order-page ul li .cnt-wrapper .btn-plus:before{
+            content: '';
+            display: block;
+            background: #00f;
+            width: 15px;
+            height: 2px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        main .order-page ul li .cnt-wrapper .btn-plus:after{
+            content: '';
+            display: block;
+            background: #00f;
+            width: 2px;
+            height: 15px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        main .order-page ul li .cnt-wrapper .btn-minus:before{
+            content: '';
+            display: block;
+            background: #f00;
+            width: 15px;
+            height: 2px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        main .order-page ul li .cnt-wrapper .btn-plus:hover{background: #00f;}
+        main .order-page ul li .cnt-wrapper .btn-minus:hover{background: #f00;}
+        main .order-page ul li .cnt-wrapper .btn-plus-minus:hover:before,
+        main .order-page ul li .cnt-wrapper .btn-plus-minus:hover:after{
+            background: #fff;
+        }
+
+
+        main .order-page ul li .bottom .memo-wrapper{
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        main .order-page ul li .bottom .memo-wrapper textarea{
             box-sizing: border-box;
             border-radius: 5px;
+            width: 100%;
+            resize: none;
+            vertical-align: top;
+            min-height: 32px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
         }
-        main .order-page ul li .cnt-wrapper .btn-plus-minus:hover{
-            background: #ddd;
-        }
+
         main .my-page header{
             padding: 10px;
         }
@@ -288,7 +377,7 @@
             justify-content: space-between;
             border-top: 1px solid rgba(0, 0, 0, .2);
             box-sizing: border-box;
-            padding: 20px 10px;
+            padding: 15px 10px;
         }
         footer label{
             /* margin-right: 50px; */
@@ -420,11 +509,14 @@
         <main>
             <div class="order-page" data-page="order">
                 <header>
-                    <button onclick="saveData()">저장</button>
+                    <div>
+                        <button onclick="saveData()">저장</button>
+                        <button onclick="addLi()">추가</button>
+
+                    </div>
                     <strong id="totalCntTag"></strong>
                 </header>
                 <ul id="itemList">
-                    <li id="addLi" class="add-li" onclick="addLi()">추가+</li>
                 </ul>
             </div>
             <div class="my-page hidden" data-page="my">
@@ -492,23 +584,16 @@
 
         const addLi = (txt) => {
             const li = document.createElement('li');
+            
             li.classList.add('yet');
             li.dataset.type = 'item';
             li.innerHTML = `
                 <div class="top">
-                    <textarea type="text" name="" class="item-nm"
-                        onkeyup="resizeTxtarea(this)"
-                        onkeydown="resizeTxtarea(this)"
-                        oninput="resizeTxtarea(this)"
-                        onfocus="resizeTxtarea(this)"
-                        onchange="resizeTxtarea(this)"
-                        onblur="resizeTxtarea(this)"
-                        rows="1"
-                    >${txt || ''}</textarea>
+                    <input type="text" name="" class="item-nm" value="${txt || ''}">
                     <div class="cnt-wrapper">
-                        <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)">-</button>
+                        <button class="btn-plus-minus btn-minus" onclick="cntCtrl(this, -1)"></button>
                         <input class="item-cnt color-red" data-id="item-cnt" type="number" onkeyup="changeValue()" onchange="changeValue()" onkeydown="changeValue()" oninput="changeValue()" value="0" onfocus="this.select()">
-                        <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)">+</button>
+                        <button class="btn-plus-minus btn-plus" onclick="cntCtrl(this, 1)"></button>
                     </div>
                 </div>
                 <div class="bottom">
@@ -526,7 +611,11 @@
                         <div>
                             <button class="btn-del" onclick="delRow2(this)">
                                 <img src="./assets/imgs/iconmonstr-trash-can-filled.svg" alt="제거" height="27"/>
-                            </button>   
+                            </button>
+                            <label class="toggle-memo">
+                                <input type="checkbox" onchange="toggleMemo(this)" />
+                                <strong>메모</strong>
+                            </label>  
                             <button class="btn-detail" onclick="toggleDetail(this)">
                                 <strong></strong>
                                 <strong></strong>
@@ -536,15 +625,26 @@
                             <!--<button>복사</button>-->    
                         </div>
                     </div>
-                    
+                    <div class="memo-wrapper hidden">
+                        <textarea rows="1"
+                            onkeyup="resizeTxtarea(this)"
+                            onkeydown="resizeTxtarea(this)"
+                            oninput="resizeTxtarea(this)"
+                            onfocus="resizeTxtarea(this)"
+                            onchange="resizeTxtarea(this)"
+                            onblur="resizeTxtarea(this)"
+                        ></textarea>
+                    </div>
                 </div>
                         
             `;
 
-            qs('#addLi').before(li);
-            setTimeout(() => {
-                li.classList.remove('yet');
-            });
+            qs('#itemList').appendChild(li);
+
+            li.onmouseenter = () => {
+                resizeTxtarea(li.querySelector('textarea'));
+            }
+            setTimeout(() => li.classList.remove('yet'));
             changeValue();
         }
 
@@ -855,9 +955,17 @@
         const toggleDetail = (trg) => {
             const detailView = trg.querySelector(':scope > span');
             setTimeout(() => detailView.classList.remove('hidden'));
-
-
         }
+        const toggleMemo = (trg) => {
+            console.log(trg.checked)
+            const memo = trg.closest('li').querySelector('.memo-wrapper');
+
+            memo.classList[trg.checked ? 'remove' : 'add']('hidden');
+
+            resizeTxtarea(trg.closest('li').querySelector('textarea'));
+        }
+
+        
 
     </script>
     
